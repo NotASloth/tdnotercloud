@@ -1,0 +1,20 @@
+version: "3"
+services:
+  
+  postgres:
+    image: "postgres:latest"
+    environment:
+      - SECRET_KEY=very hard to guess string
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=db
+
+  flaskapp:
+    build: .
+    image: flask-pw9
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+    depends_on:
+      - postgres
